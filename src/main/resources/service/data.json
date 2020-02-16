@@ -1,0 +1,56 @@
+{
+  "value": [
+    {
+      "GOCfunction": "ShootingServices",
+      "Portfolio_within_the_function": "Photography and Videography",
+      "Purpose_of_the_Portfolio": "Purpose 1",
+      "Capabilities": "Editing Images",
+      "Activity": "Activity for Editing Images",
+      "Skill_Set_required": "Knowledge of manual camera settings",
+      "Systems": "Adobe Lightroom",
+      "Locations": "India",
+      "Asset_Class_and_Channel_Knowledge" : "Color Theory",
+      "Key_Business_stakeholder" : "Cinematographer",
+      "Contact" : "Jason Keeping"
+    },
+    {
+      "GOCfunction": "ShootingServices",
+      "Portfolio_within_the_function": "Photography and Videography",
+      "Purpose_of_the_Portfolio": "Purpose 1",
+      "Capabilities": "Camera Operations",
+      "Activity": "Activity for Camera Operations",
+      "Skill_Set_required": "lighting and color theory",
+      "Systems": "Photoshop",
+      "Locations": "UK",
+      "Asset_Class_and_Channel_Knowledge": "Composition",
+      "Key_Business_stakeholder": "Director",
+      "Contact": "Rahul Aggrawal"
+    },
+    {
+      "GOCfunction": "PreReleaseServices",
+      "Portfolio_within_the_function": "Marketing, Promotions and Social Media",
+      "Purpose_of_the_Portfolio": "Purpose 2",
+      "Capabilities": "Social Campaigns",
+      "Activity": "Activity for Social Campaigns",
+      "Skill_Set_required": "Understanding analytics",
+      "Systems": "Google Analytics",
+      "Locations": "India",
+      "Asset_Class_and_Channel_Knowledge" : "Instagram",
+      "Key_Business_stakeholder" : "Producer",
+      "Contact" : "Martin Auer"
+    },
+    {
+      "GOCfunction": "PreReleaseServices",
+      "Portfolio_within_the_function": "Marketing, Promotions and Social Media",
+      "Purpose_of_the_Portfolio": "Purpose 2",
+      "Capabilities": "Sales and Assets",
+      "Activity": "Activity for Sales and Assets",
+      "Skill_Set_required": "SEO",
+      "Systems": "Search Me More",
+      "Locations": "UK",
+      "Asset_Class_and_Channel_Knowledge" : "YouTube",
+      "Key_Business_stakeholder" : "Producer",
+      "Contact" : "Andy Li"
+    }
+  ]
+}
