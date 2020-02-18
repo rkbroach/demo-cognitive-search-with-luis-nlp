@@ -2,9 +2,17 @@
   "name": "main-index",
   "fields": [
     {
-      "name": "GOCfunction",
+      "name": "sno",
       "type": "Edm.String",
       "key" : true,
+      "searchable": false,
+      "filterable": true,
+      "sortable": false,
+      "facetable": true
+    },
+    {
+      "name": "GOCfunction",
+      "type": "Edm.String",
       "searchable": true,
       "filterable": true,
       "sortable": false,

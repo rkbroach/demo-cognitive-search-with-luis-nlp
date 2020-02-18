@@ -1,9 +1,7 @@
 package main.java.service;
 
-import javax.json.Json;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -223,34 +221,37 @@ public class SearchServiceClient {
         return optionsString;
     }
 
-    public void searchPlus(String queryString)
-    {
+    public void searchPlus(String queryString) throws IOException, InterruptedException {
         searchPlus( queryString, null);
     }
 
-    public void searchPlus(String queryString, SearchOptions options) {
+    public String searchPlus(String queryString, SearchOptions options) throws IOException, InterruptedException {
 
-        try {
+//        try {
             String optionsString = createOptionsString(options);
             var uri = buildURI(strFormatter -> strFormatter.format(
                     "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=%s%s",
                     _serviceName, _indexName, _apiVersion, queryString, optionsString));
             var request = httpRequest(uri, _queryKey, "GET", null);
             var response = sendRequest(request);
-            var jsonReader = Json.createReader(new StringReader(response.body()));
-            var jsonArray = jsonReader.readObject().getJsonArray("value");
-            var resultsCount = jsonArray.size();
-            logMessage("Results:\nCount: " + resultsCount);
-            for (int i = 0; i <= resultsCount - 1; i++) {
-                logMessage(jsonArray.get(i).toString());
-            }
 
-            jsonReader.close();
+        System.out.println("Wanna test");
+return response.body();
+//        System.out.println(response);
+//            var jsonReader = Json.createReader(new StringReader(response.body()));
+//            var jsonArray = jsonReader.readObject().getJsonArray("value");
+//            var resultsCount = jsonArray.size();
+//            logMessage("Results:\nCount: " + resultsCount);
+//            for (int i = 0; i <= resultsCount - 1; i++) {
+//                logMessage(jsonArray.get(i).toString());
+//            }
+//
+//            jsonReader.close();
 
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
