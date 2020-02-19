@@ -2,9 +2,9 @@
   "name": "main-index",
   "fields": [
     {
-      "name": "sno",
+      "name": "SNo",
       "type": "Edm.String",
-      "key" : true,
+      "key": true,
       "searchable": false,
       "filterable": true,
       "sortable": false,
@@ -41,7 +41,6 @@
       "filterable": true,
       "sortable": false,
       "facetable": true
-
     },
     {
       "name": "Activity",
@@ -58,7 +57,6 @@
       "filterable": true,
       "sortable": false,
       "facetable": true
-
     },
     {
       "name": "Systems",
@@ -67,7 +65,6 @@
       "filterable": true,
       "sortable": false,
       "facetable": true
-
     },
     {
       "name": "Locations",
@@ -76,7 +73,6 @@
       "filterable": true,
       "sortable": false,
       "facetable": true
-
     },
     {
       "name": "Asset_Class_and_Channel_Knowledge",
@@ -85,7 +81,6 @@
       "filterable": true,
       "sortable": false,
       "facetable": true
-
     },
     {
       "name": "Key_Business_stakeholder",

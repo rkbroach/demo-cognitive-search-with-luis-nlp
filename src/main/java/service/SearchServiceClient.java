@@ -25,7 +25,7 @@ public class SearchServiceClient {
     // CUSTOM NLP CODE
     public static String applyNLP(String luisQuery) {
         // Create URI for LUIS Endpoint
-        String myUri = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/0f672e73-42fb-423d-8ce2-d351e2b155b7?";
+        String myUri = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/c7f92de5-cb6e-4a4e-99c0-ae4cb23fd029?";
         myUri = myUri + "verbose=true&timezoneOffset=0&subscription-key=977bcb8b2ed142a1ab214c58c715dad9&";
         myUri = myUri + "q=" + encodeValue(luisQuery);
 
@@ -39,7 +39,7 @@ public class SearchServiceClient {
             default:
                 throw new IllegalArgumentException(String.format("Can't create request for method '%s'", method));
         }
-        HttpRequest request =  builder.build();
+        HttpRequest request = builder.build();
 
         try {
             HttpResponse<String> response = sendRequest(request);
@@ -74,8 +74,7 @@ public class SearchServiceClient {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private static URI buildURI(Consumer<Formatter> fmtFn)
-    {
+    private static URI buildURI(Consumer<Formatter> fmtFn) {
         Formatter strFormatter = new Formatter();
         fmtFn.accept(strFormatter);
         String url = strFormatter.out().toString();
@@ -144,7 +143,7 @@ public class SearchServiceClient {
         logMessage("\n Checking if index exists...");
         var uri = buildURI(strFormatter -> strFormatter.format(
                 "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=*",
-                _serviceName,_indexName,_apiVersion));
+                _serviceName, _indexName, _apiVersion));
         var request = httpRequest(uri, _adminKey, "HEAD", "");
         var response = sendRequest(request);
         return isSuccessResponse(response);
@@ -154,7 +153,7 @@ public class SearchServiceClient {
         logMessage("\n Deleting index...");
         var uri = buildURI(strFormatter -> strFormatter.format(
                 "https://%s.search.windows.net/indexes/%s?api-version=%s",
-                _serviceName,_indexName,_apiVersion));
+                _serviceName, _indexName, _apiVersion));
         var request = httpRequest(uri, _adminKey, "DELETE", "*");
         var response = sendRequest(request);
         return isSuccessResponse(response);
@@ -166,7 +165,7 @@ public class SearchServiceClient {
         //Build the search service URL
         var uri = buildURI(strFormatter -> strFormatter.format(
                 "https://%s.search.windows.net/indexes/%s?api-version=%s",
-                _serviceName,_indexName,_apiVersion));
+                _serviceName, _indexName, _apiVersion));
         //Read in index definition file
         var inputStream = SearchServiceClient.class.getResourceAsStream(indexDefinitionFile);
         var indexDef = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
@@ -182,7 +181,7 @@ public class SearchServiceClient {
         //Build the search service URL
         var endpoint = buildURI(strFormatter -> strFormatter.format(
                 "https://%s.search.windows.net/indexes/%s/docs/index?api-version=%s",
-                _serviceName,_indexName,_apiVersion));
+                _serviceName, _indexName, _apiVersion));
         //Read in the data to index
         var inputStream = SearchServiceClient.class.getResourceAsStream(documentsFile);
         var documents = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
@@ -193,7 +192,9 @@ public class SearchServiceClient {
     }
 
 
-    public SearchOptions createSearchOptions() { return new SearchOptions();}
+    public SearchOptions createSearchOptions() {
+        return new SearchOptions();
+    }
 
     //Defines available search parameters that can be set
     public static class SearchOptions {
@@ -201,12 +202,11 @@ public class SearchServiceClient {
         public String select = "";
         public String filter = "";
         public int top = 0;
-        public String orderby= "";
+        public String orderby = "";
     }
 
     //Concatenates search parameters to append to the search request
-    private String createOptionsString(SearchOptions options)
-    {
+    private String createOptionsString(SearchOptions options) {
         String optionsString = "";
         if (options != null) {
             if (options.select != "")
@@ -216,27 +216,27 @@ public class SearchServiceClient {
             if (options.top != 0)
                 optionsString = optionsString + "&$top=" + options.top;
             if (options.orderby != "")
-                optionsString = optionsString + "&$orderby=" +options.orderby;
+                optionsString = optionsString + "&$orderby=" + options.orderby;
         }
         return optionsString;
     }
 
     public void searchPlus(String queryString) throws IOException, InterruptedException {
-        searchPlus( queryString, null);
+        searchPlus(queryString, null);
     }
 
     public String searchPlus(String queryString, SearchOptions options) throws IOException, InterruptedException {
 
 //        try {
-            String optionsString = createOptionsString(options);
-            var uri = buildURI(strFormatter -> strFormatter.format(
-                    "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=%s%s",
-                    _serviceName, _indexName, _apiVersion, queryString, optionsString));
-            var request = httpRequest(uri, _queryKey, "GET", null);
-            var response = sendRequest(request);
+        String optionsString = createOptionsString(options);
+        var uri = buildURI(strFormatter -> strFormatter.format(
+                "https://%s.search.windows.net/indexes/%s/docs?api-version=%s&search=%s%s",
+                _serviceName, _indexName, _apiVersion, queryString, optionsString));
+        var request = httpRequest(uri, _queryKey, "GET", null);
+        var response = sendRequest(request);
 
         System.out.println("Wanna test");
-return response.body();
+        return response.body();
 //        System.out.println(response);
 //            var jsonReader = Json.createReader(new StringReader(response.body()));
 //            var jsonArray = jsonReader.readObject().getJsonArray("value");

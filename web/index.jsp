@@ -1,59 +1,80 @@
 <%@ page import="main.java.app.App" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="main.java.app.Result" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: broac
-  Date: 17-02-2020
-  Time: 09:57
-  To change this template use File | Settings | File Templates.
+<%@ page import="java.util.List" %>
+<%--
+    Project Name: Contextual Search Prototype
+    Created by: Anshul Tyagi, Mohak Bahl, Nitya Singh and Rohan Kevin Broach
+    Date: 19-02-2020
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>Contextual Search with NLP Capability</title>
-  </head>
-  <body>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.css">
 
-    <h1>Contextual Search with NLP Capability using Azure Cognitive Services</h1>
-    <p>by Anshul, Mohak, Nitya, Rohan</p>\
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <form name="searchForm" method="post" action="index.jsp">
-      Search: <input type="text" name="searchQuery"/> <br/>
-      <input type="submit" value="Search" />
-    </form>
-    <%
-      String searchQuery = request.getParameter("searchQuery");
-      if (searchQuery == null) {
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Contextual Search Prototype</title>
+
+</head>
+<body>
+
+<!-- Search Bar -->
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Contextual Search Prototype</h1>
+        <p class="lead">A project by Anshul Tyagi, Mohak Bahl, Nitya Singh and Rohan Kevin Broach</p>
+        <hr class="my-4">
+        <p class="lead">
+        <form class="form-inline" name="searchForm" method="post" action="index.jsp">
+            <input class="form-control col-sm-10" type="text" placeholder="Search" name="searchQuery">
+            <!--<button class="btn btn-secondary my-2 offset-sm-1 col" type="submit" value="Search">Search</button> -->
+            <button class="btn btn-primary btn-lg" type="submit" value="Search">Search</button>
+        </form>
+        </p>
+    </div>
+</div>
+
+<!-- Query Processing -->
+<%
+    String searchQuery = request.getParameter("searchQuery");
+    if (searchQuery == null) {
         // myText is null when the page is first requested, so do nothing
-      } else {
+    } else {
         if (searchQuery.length() == 0) {
-          // a zero length string
-    %>
-    <b> Search Query is empty</b>
-    <%   } else { %>
-    <b>Search Query is <%= searchQuery %></b>
-    <%
-          App appObj = new App();
-          List<String> list = appObj.getSearchQuery(searchQuery);
-          out.println("<ol> ");
-          for(String ans : list)
-          {
-            out.println("<li> " + ans + "</li> ");
-          }
-          out.println("</ol>");
+            // a zero length string
+%>
+<div class="container">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Sorry!</strong>Try searching again.
+    </div>
+</div>
+
+<!-- Results -->
+<% } else {
+    App appObj = new App();
+    List<String> list = appObj.getSearchQuery(searchQuery);
+%>
+<div class="container">
+    <div class="card-columns">
+        <% for(String ans : list) { %>
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title"><%out.print(ans);%></h4>
+                </div>
+            </div>
+        <%}
+        out.println("</div></div>");
         }
       }
     %>
-<!-- ---------------------------------------- -->
 
 
-
-
-
-
-
-
-
-  </body>
+</body>
 </html>
